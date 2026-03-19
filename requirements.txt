@@ -1,0 +1,6 @@
+# spot-orbit-plugin Python dependencies
+# Required for Python < 3.11 (3.11+ has built-in tomllib)
+tomli>=1.1.0; python_version < "3.11"
+
+# Optional: Boston Dynamics Orbit SDK
+# bosdyn-orbit>=4.1.1

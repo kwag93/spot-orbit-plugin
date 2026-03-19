@@ -1,0 +1,12 @@
+.omc/
+.omx/
+*.jsonl
+.DS_Store
+_internal_refs/
+_ANALYSIS_REPORT.md
+config.toml
+claude-confluence-study-prompt.txt
+.claude/settings.local.json
+node_modules/
+__pycache__/
+*.pyc

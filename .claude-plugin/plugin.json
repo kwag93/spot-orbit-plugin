@@ -1,0 +1,28 @@
+{
+  "name": "spot-orbit",
+  "version": "1.0.0",
+  "description": "Boston Dynamics Spot Orbit API explorer, SPX extension builder, and SDK guide for Claude Code",
+  "author": {
+    "name": "spot-orbit-contributors"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/kwag93/spot-orbit-plugin",
+  "homepage": "https://github.com/kwag93/spot-orbit-plugin#readme",
+  "categories": ["robotics", "api", "iot", "devtools"],
+  "capabilities": ["mcp-server", "hooks", "skills", "agents", "commands"],
+  "keywords": [
+    "boston-dynamics",
+    "spot",
+    "orbit",
+    "spx",
+    "extension",
+    "robot",
+    "bosdyn-orbit",
+    "orbit-api",
+    "mcp"
+  ],
+  "engines": {
+    "python": ">=3.7"
+  },
+  "supportedPlatforms": ["darwin", "linux", "win32"]
+}

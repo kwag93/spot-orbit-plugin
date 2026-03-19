@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "orbit-api": {
+      "command": "python3",
+      "args": ["scripts/orbit-mcp-server.py"]
+    }
+  }
+}

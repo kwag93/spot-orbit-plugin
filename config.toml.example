@@ -1,0 +1,7 @@
+[orbit]
+hostname = "your-orbit-hostname.com"
+api_token = "your-api-token-here"
+verify_ssl = false
+enable_write_tools = false
+# Set verify_ssl = true for production with valid certificates.
+# Set enable_write_tools = true only if you intend to use POST/PATCH/DELETE Orbit tools.

@@ -1,0 +1,22 @@
+{
+  "description": "Orbit plugin hooks for SPX validation and API config checks",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/validate-spx.sh",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/check-orbit-config.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

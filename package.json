@@ -1,0 +1,54 @@
+{
+  "name": "spot-orbit-plugin",
+  "version": "1.0.0",
+  "description": "Claude Code plugin for Boston Dynamics Spot Orbit API development",
+  "main": "scripts/orbit-mcp-server.py",
+  "bin": {
+    "spot-orbit-plugin": "bin/spot-orbit.js"
+  },
+  "scripts": {
+    "postinstall": "node bin/spot-orbit.js install",
+    "preuninstall": "node bin/spot-orbit.js uninstall",
+    "check": "node bin/spot-orbit.js status",
+    "doctor": "node bin/spot-orbit.js doctor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwag93/spot-orbit-plugin.git"
+  },
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "boston-dynamics",
+    "spot",
+    "orbit",
+    "spx",
+    "robot",
+    "mcp"
+  ],
+  "author": "spot-orbit-contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kwag93/spot-orbit-plugin/issues"
+  },
+  "homepage": "https://github.com/kwag93/spot-orbit-plugin#readme",
+  "files": [
+    "bin/",
+    ".claude-plugin/",
+    ".mcp.json",
+    "agents/",
+    "commands/",
+    "docs/",
+    "hooks/",
+    "scripts/",
+    "skills/",
+    "config.toml.example",
+    "install.sh",
+    "LICENSE",
+    "README.md",
+    "README.ko.md",
+    "README.ja.md",
+    "README.zh.md",
+    "CHANGELOG.md"
+  ]
+}
