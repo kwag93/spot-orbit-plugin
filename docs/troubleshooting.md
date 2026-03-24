@@ -223,6 +223,57 @@ https://<ORBIT_IP>/api/v0/docs/
 v4.1.x and v5.x have some endpoint differences.
 The Swagger on the actual instance is the most accurate spec.
 
+### Action name with special characters causes image download failure
+
+**Symptom**: Images are missing in reports/data for actions whose names contain `#`, `?`, or other URL-special characters. Removing the special character from the action name resolves the issue.
+
+**Cause**: Orbit's `dataUrl` embeds the action name directly as a path component:
+
+```text
+/daq/download/{robot}/{timestamp}/{actionName}/{actionName} {channel} {filename}.jpg
+```
+
+When building the full image URL (`https://{hostname}{dataUrl}`), characters like `#` are interpreted as URL fragment identifiers. Everything after `#` is silently dropped and never sent to the server:
+
+```text
+Action name: "점검#1"
+
+❌ Before (broken):
+   https://orbit-host/daq/download/.../점검#1/점검#1 image.jpg
+   → Server receives: /daq/download/.../점검  (everything after # is lost)
+   → 404 Not Found
+
+✅ After (fixed):
+   https://orbit-host/daq/download/.../%EC%A0%90%EA%B2%80%231/%EC%A0%90%EA%B2%80%231%20image.jpg
+   → Server receives the full path
+   → 200 OK
+```
+
+**Dangerous characters**:
+
+| Character | URL meaning | Risk |
+| --- | --- | --- |
+| `#` | Fragment identifier | **High** — truncates everything after it |
+| `?` | Query string start | **High** — breaks path parsing |
+| `%` | Percent-encoding prefix | **Medium** — causes double-encoding |
+| `&` | Query parameter separator | Low — only affects query strings |
+
+**Fix**: When constructing image URLs from `dataUrl`, use `urllib.parse.quote` instead of manual string replacement:
+
+```python
+from urllib.parse import quote
+
+# ❌ Insufficient — only encodes spaces
+image_url = image_url.replace(" ", "%20")
+
+# ✅ Correct — encodes all URL-unsafe characters while preserving path separators
+image_url = f"https://{hostname}{quote(data_url, safe='/')}"
+```
+
+**Note**: The `bosdyn.orbit.utils` helper functions (`data_capture_urls_from_run_events`, etc.) also concatenate URLs without encoding. Apply the same fix when using these utilities.
+
+**Verified**: 2026-03-24, Orbit v5.1.4
+
 ---
 
 ## Scout → Orbit Migration
