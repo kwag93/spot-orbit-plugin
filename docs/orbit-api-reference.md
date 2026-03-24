@@ -253,6 +253,13 @@ client.get_image(url: str, **kwargs) → urllib3.response.HTTPResponse
 client.get_image_response(url: str, **kwargs) → Response
 ```
 
+> **⚠ URL encoding required**: `dataUrl` includes the action name as a path component
+> (e.g., `/daq/download/{robot}/{timestamp}/{actionName}/...`).
+> If the action name contains URL-special characters (`#`, `?`, `%`),
+> the URL must be encoded with `urllib.parse.quote(path, safe='/')` before passing to `get_image()`.
+> Without encoding, `#` is interpreted as a fragment identifier and truncates the URL silently.
+> See [Troubleshooting: Action name with special characters](troubleshooting.md#action-name-with-special-characters-causes-image-download-failure) for details.
+
 ---
 
 ## bosdyn.orbit.utils
